@@ -5,9 +5,6 @@ const completedTasksStyle = {
     boxShadow: 'none',
     color: '#777'
 }
-const emptyObject = {
-    
-}
 
 
 function AppComponent(props) {

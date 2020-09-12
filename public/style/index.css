@@ -138,7 +138,6 @@ body {
 }
 
 .App main ol li div input {
-  all: unset;
   width: 1rem;
   height: 1rem;
   margin: 4px;
