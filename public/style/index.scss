@@ -7,8 +7,12 @@
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
 }
-body{
+body {
     background-color: rgb(236, 232, 232);
+}
+
+.root{
+    position: relative;
 }
 .App {
     all: unset;
@@ -28,6 +32,7 @@ body{
         h1 {
             color: whitesmoke;
         }
+        padding-bottom: 0.5rem;
     }
     main {
         grid-column: 2/3;
@@ -105,7 +110,6 @@ body{
                     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
                 }
 
-                
                 div {
                     margin-left: auto;
                     display: flex;
@@ -116,14 +120,12 @@ body{
                     // background-color: white;
                     background-color: transparent;
 
-
-
                     // border: 1px solid;
                     // completed checkbox
-                    input{
+                    input {
                         width: 1rem;
                         height: 1rem;
-                        margin: 4px;                        
+                        margin: 4px;
                     }
 
                     // delete button
@@ -145,12 +147,43 @@ body{
                         &:hover {
                             border: none;
                             background-color: rgb(240, 240, 47);
-                            color: black
+                            color: black;
                         }
                     }
-                    
                 }
             }
         }
+    }
+}
+
+.contactSites {
+    position: absolute;
+    bottom: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+
+    background-color: rgb(27, 27, 99);
+
+    .sites {
+        display: flex;
+        justify-content: space-around;
+
+        .github{
+            margin-right: auto;
+        }
+
+        span{
+            margin: 1rem;
+
+            a{
+                // text-decoration: none;
+                color: white;
+                font-weight: bold;
+                font-size: .8rem;
+                text-transform: uppercase;
+            }
+        }
+
     }
 }

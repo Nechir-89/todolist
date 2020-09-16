@@ -1,9 +1,14 @@
 import React from 'react';
 import AppContainer from './AppContainer'
+import Footer from './Footer'
 
-function App(){
+function App() {
   return (
-    <AppContainer />
+    <div>
+      <AppContainer />
+      <Footer />
+    </div>
+
   )
 }
 
