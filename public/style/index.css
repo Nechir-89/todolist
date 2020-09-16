@@ -13,6 +13,10 @@ body {
   background-color: #ece8e8;
 }
 
+.root {
+  position: relative;
+}
+
 .App {
   all: unset;
   width: 100vw;
@@ -35,6 +39,7 @@ body {
   height: 100px;
   padding: 0rem 1rem;
   background-color: #1b1b63;
+  padding-bottom: 0.5rem;
 }
 
 .App header h1 {
@@ -159,5 +164,38 @@ body {
   border: none;
   background-color: #f0f02f;
   color: black;
+}
+
+.contactSites {
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  width: 600px;
+  background-color: #1b1b63;
+}
+
+.contactSites .sites {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.contactSites .sites .github {
+  margin-right: auto;
+}
+
+.contactSites .sites span {
+  margin: 1rem;
+}
+
+.contactSites .sites span a {
+  color: white;
+  font-weight: bold;
+  font-size: .8rem;
+  text-transform: uppercase;
 }
 /*# sourceMappingURL=index.css.map */
