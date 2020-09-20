@@ -1,91 +1,97 @@
-import React from "react"
+import React, { useState } from "react"
 import AppComponent from './AppComponent'
+import TodoContext from './TodoContext'
 
-
-class AppContainer extends React.Component {
-    constructor() {
-        super()
-        this.state = {
-            item: "",
-            counter: 0,
-            isItDone: [],
-            list: []
-        }
-        this.updateInput = this.updateInput.bind(this)
-        this.addItem = this.addItem.bind(this)
-        this.deletItem = this.deletItem.bind(this)
-    }
-
-    updateInput(event) {
-        const { name, value, type, checked, id } = event.target;
+function AppContainer() {
+    const [item, setItem] = useState('');
+    const [counter, setCounter] = useState(0);
+    const [isItDone, setIsItDone] = useState([]);
+    const [list, setList] = useState([]);
+    
+    function updateInput(event) {
+        const { value, type, checked, id } = event.target;
         if (type === 'checkbox') {
-            const completedTasks = [...this.state.isItDone];
+            const completedTasks = [...isItDone];
             completedTasks[id] = checked;
-            // console.log(completedTasks);
-            this.setState({ [name]: completedTasks });
-            
+            setIsItDone(completedTasks)
+
         } else {
-            this.setState({ [name]: value });
+            setItem(value)
         }
 
     }
 
-    addItem() {
-        if (this.state.item === '')
+    // adding new item to list
+    function addItem() {
+        if (item === '')
             return;
         // create new List
-        const newList = [...this.state.list]
-
+        const newList = [...list]
         // completed items or tasks
-        const completedTasks = [...this.state.isItDone]
+        const completedTasks = [...isItDone]
         completedTasks.push(false)
 
         // new item
         const newItem = {
-            id: this.state.counter,
-            value: this.state.item
+            id: counter,
+            value: item
         }
 
         // adding item to list
         newList.push(newItem)
 
         // add one to counter
-        const newCounter = this.state.counter + 1;
+        // const newCounter = this.state.counter + 1;
 
-        this.setState(
-            {
-                item: "",
-                counter: newCounter,
-                isItDone: completedTasks,
-                list: newList
-            }
-        )
+        setItem('');
+        setCounter(prevCounter => prevCounter + 1);
+        setIsItDone(completedTasks);
+        setList(newList);
+        // this.setState(
+        //     {
+        //         item: "",
+        //         counter: newCounter,
+        //         isItDone: completedTasks,
+        //         list: newList
+        //     }
+        // )
     }
-
-    deletItem(id) {
-        const list = [...this.state.list]
-        const newList = list.filter(item => item.id !== id)
-        this.setState({ list: newList })
-    }
-
-    handleKeyPressed = (event) => {
+    // keypress for enter key
+    function handleKeyPressed(event) {
         // console.log(event.key);
         if (event.key === 'Enter') {
-            this.addItem();
+            addItem();
         }
     }
-
-    render() {
-        return (
-            <AppComponent
-                handleKeyPressed={this.handleKeyPressed}
-                deletItem={this.deletItem}
-                addItem={this.addItem}
-                updateInput={this.updateInput}
-                {...this.state}
-            />
-        )
+    // deleting an item from list
+    function deletItem(id) {
+        const oldlist = [...list]
+        const newList = oldlist.filter(item => item.id !== id)
+        // this.setState({ list: newList })
+        setList(newList);
     }
+
+    return (
+
+        <TodoContext.Provider 
+        value={
+            {
+                item,
+                counter,
+                isItDone,
+                list,
+                handleKeyPressed,
+                deletItem,
+                addItem,
+                updateInput
+            }
+        }>
+            <AppComponent
+               
+            />
+        </TodoContext.Provider>
+    )
 }
+
 
 export default AppContainer

@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import TodoContext from './TodoContext'
 
 const completedTasksStyle = {
     backgroundColor: 'transparent',
@@ -7,9 +8,9 @@ const completedTasksStyle = {
 }
 
 
-function AppComponent(props) {
-    const item = props.item;
-    const list = props.list;
+function AppComponent() {
+    // const value = useContext(TodoContext);
+   const {item, isItDone, list, handleKeyPressed, deletItem, addItem, updateInput} = useContext(TodoContext);
     return (
         <div className="App">
             <header>
@@ -21,33 +22,35 @@ function AppComponent(props) {
                         value={item}
                         name="item"
                         placeholder="Type item here..."
-                        onChange={props.updateInput}
-                        onKeyPress={props.handleKeyPressed}
+                        onChange={updateInput}
+                        onKeyPress={handleKeyPressed}
                     />
 
-                    <button onClick={props.addItem}>Add</button>
+                    <button onClick={addItem}>Add</button>
                 </div>
                 <ol>
-                    {list.map(element => {
-                        return (
-                            <li key={element.id} style={props.isItDone[element.id] ? completedTasksStyle : {} }>
+                    {
+                        list.map(element => {
+                            return (
+                                <li key={element.id} style={isItDone[element.id] ? completedTasksStyle : {}}>
 
-                                {element.value}
+                                    {element.value}
 
-                                <div>
-                                    <input type='checkbox' 
-                                        name='isItDone'
-                                        id={element.id}
-                                        checked={props.isItDone[element.id]}
-                                        onChange={props.updateInput}
+                                    <div>
+                                        <input type='checkbox'
+                                            name='isItDone'
+                                            id={element.id}
+                                            checked={isItDone[element.id]}
+                                            onChange={updateInput}
 
-                                    />
-                                    <button onClick={() => props.deletItem(element.id)}>x</button>
-                                </div>
+                                        />
+                                        <button onClick={() => deletItem(element.id)}>x</button>
+                                    </div>
 
-                            </li>
-                        )
-                    })}
+                                </li>
+                            )
+                        })
+                    }
                 </ol>
             </main>
         </div>
